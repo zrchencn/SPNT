@@ -122,3 +122,7 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Unity Memory Allocations
+MemorySettings.asset
+boot.config
