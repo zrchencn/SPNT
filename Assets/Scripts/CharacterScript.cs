@@ -32,13 +32,11 @@ public class CharacterScript : MonoBehaviour
 
         // Ground Movement
         float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-        Vector3 movement = (playerTransform.right * x) + (playerTransform.forward * z);
+        Vector3 movement = (playerTransform.right * x) + (playerTransform.forward * 1);
         controller.Move(movement * (forwardRunSpeed * Time.deltaTime));
         // Joystick Ground Movement
         float xJ = Input.GetAxis("LeftJoystick Horizontal");
-        float zJ = Input.GetAxis("LeftJoystick Vertical");
-        Vector3 movementJ = (playerTransform.right * xJ) + (playerTransform.forward * zJ);
+        Vector3 movementJ = (playerTransform.right * xJ) + (playerTransform.forward * 1);
         controller.Move(movementJ * (forwardRunSpeed * Time.deltaTime));
         
 
