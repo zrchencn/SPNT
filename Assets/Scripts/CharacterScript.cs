@@ -11,8 +11,8 @@ public class CharacterScript : MonoBehaviour
     private Vector3 velocity;
     private bool grounded;
     private float gravity = -9.8f;
-    private float groundCastDist = 0.05f;
-    public float forwardRunSpeed = 10f;
+    private float groundCastDist = 0.5f;
+    public float forwardRunSpeed = 50f;
     public float sidestepSpeed = 30f;
     public float jumpHeight = 30f;
     
@@ -29,21 +29,11 @@ public class CharacterScript : MonoBehaviour
         // Grounded
         Transform playerTransform = transform;
         grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
-        
-        // Debugging
-        if (Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist))
-        {
-            Debug.DrawRay(playerTransform.position, Vector3.down, Color.blue);
-        }
-        else
-        {
-            Debug.DrawRay(playerTransform.position, Vector3.down, Color.red);
-        }
 
         // Ground Movement
         float x = Input.GetAxis("Horizontal");
-        velocity.z = forwardRunSpeed * Time.deltaTime;
-        velocity.x = x * sidestepSpeed * Time.deltaTime;
+        Vector3 movement = (playerTransform.right * x) + (playerTransform.forward * 1);
+        controller.Move(movement * (forwardRunSpeed * Time.deltaTime));
 
         // Jumping
         if (Input.GetButton("Jump") && grounded)
@@ -53,5 +43,7 @@ public class CharacterScript : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+        
+        
     }
 }
