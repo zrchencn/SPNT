@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         currentTime = 0f;
-        endTime = 5f;
+        endTime = 30f;
     }
 
     // Update is called once per frame
