@@ -1,10 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:GroupBox name="report" style="display: flex; flex-shrink: 1; flex-grow: 1; align-items: center;">
+    <ui:GroupBox name="report" style="display: flex; flex-shrink: 1; flex-grow: 1; align-items: flex-end; right: 10%; font-size: 20px;">
         <ui:GroupBox name="TopGB" style="display: flex;">
-            <ui:Label text="You Died" display-tooltip-when-elided="true" name="DeathMessage" style="height: NaNpx; width: NaNpx;" />
-            <ui:Label text="Score" display-tooltip-when-elided="true" name="ScoreMessage" />
+            <ui:Label text="GAME END" display-tooltip-when-elided="true" name="EndLabel" style="height: NaNpx; width: NaNpx;" />
+            <ui:Label text="Score" display-tooltip-when-elided="true" name="ScoreLabel" style="font-size: 20px; top: 10px;" />
         </ui:GroupBox>
-        <ui:GroupBox name="BottomGB" style="justify-content: space-around; top: 60%;">
+        <ui:GroupBox name="BottomGB" style="justify-content: space-around; top: auto; left: 10%;">
             <ui:Button text="RESTART" display-tooltip-when-elided="true" name="Restart" style="top: auto;" />
         </ui:GroupBox>
     </ui:GroupBox>

@@ -17,6 +17,7 @@ public class StartSceneManager : MonoBehaviour
         if (Input.anyKey)
         {
             SceneManager.LoadScene("Scenes/SampleScene");
+            Time.timeScale = 1;
         }
     }
 }
