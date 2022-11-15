@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterScript : MonoBehaviour
 {
@@ -8,6 +8,8 @@ public class CharacterScript : MonoBehaviour
     [Tooltip("Insert Character Controller")]
     private CharacterController controller;
 
+    public static event Action onPlayerDeath;
+    
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
@@ -16,12 +18,13 @@ public class CharacterScript : MonoBehaviour
     public float forwardRunSpeed = 50f;
     public float sidestepSpeed = 30f;
     public float jumpHeight = 30f;
+    public float health = 100f;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = 100f;
     }
 
     // Update is called once per frame
@@ -57,6 +60,11 @@ public class CharacterScript : MonoBehaviour
         
         // Object Collision
         hit = Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f);
-
+        
+        // Health and Death
+        if (health <= 0 || playerTransform.position.y <= -20)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
