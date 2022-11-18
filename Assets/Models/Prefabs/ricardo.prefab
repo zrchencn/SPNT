@@ -647,8 +647,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6891659455334631812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1326, y: 1.1326, z: 1.1326}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1783308504594969514}
@@ -720,14 +720,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6009347898656415279}
-  playerAnimator: {fileID: 6009347898656415277}
-  velocity: {x: 0, y: 0, z: 0}
-  grounded: 0
-  groundCastDist: 1.4
-  gravity: -20
   forwardRunSpeed: 7
   sidestepSpeed: 7
   jumpHeight: 100
+  health: 100
 --- !u!1 &7040279911607571522
 GameObject:
   m_ObjectHideFlags: 0
