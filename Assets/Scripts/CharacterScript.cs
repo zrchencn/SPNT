@@ -13,12 +13,14 @@ public class CharacterScript : MonoBehaviour
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
-    private float gravity = -9.8f;
-    private float groundCastDist = 0.5f;
-    public float forwardRunSpeed = 50f;
-    public float sidestepSpeed = 30f;
-    public float jumpHeight = 30f;
+    private float gravity = -15f;
+    private float groundCastDist = 1.5f;
+    public float forwardRunSpeed = 7f;
+    public float sidestepSpeed = 50f;
+    public float jumpHeight = 70f;
     public float health = 100f;
+
+    private Rigidbody rigidbody;
     
     
     // Start is called before the first frame update
@@ -33,20 +35,21 @@ public class CharacterScript : MonoBehaviour
         // Grounded
         Transform playerTransform = transform;
         grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
-
+        
         // Ground Movement
         float x = Input.GetAxis("Horizontal");
         Vector3 movement = (playerTransform.right * x) + (playerTransform.forward * 1);
         controller.Move(movement * (forwardRunSpeed * Time.deltaTime));
 
         // Jumping
-        if (Input.GetButton("Jump") && grounded)
+        velocity.y += gravity * Time.deltaTime;
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
+            //rigidbody.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
         }
-
-        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
         
         // Crouching
         if (Input.GetKey(KeyCode.LeftShift) && grounded)
@@ -55,12 +58,18 @@ public class CharacterScript : MonoBehaviour
         }
         else
         {
-            controller.height = 5.5f;
+            controller.height = 3.41f;
         }
         
         // Object Collision
         hit = Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f);
         
+        // Grounded is true if you are standing on top of an object
+        if (Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f))
+        {
+            grounded = true;
+        }
+
         // Health and Death
         if (health <= 0 || playerTransform.position.y <= -20)
         {

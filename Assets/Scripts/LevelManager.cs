@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         currentTime = 0f;
-        endTime = 30f;
+        endTime = Single.PositiveInfinity;
     }
 
     // Update is called once per frame
