@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 3793217779284013624}
   - component: {fileID: 3793217779284013606}
   - component: {fileID: 4063758318021268260}
+  - component: {fileID: 6619610385825782355}
   m_Layer: 0
   m_Name: Ricky
   m_TagString: Untagged
@@ -518,6 +519,20 @@ MonoBehaviour:
   sidestepSpeed: 50
   jumpHeight: 50
   health: 100
+--- !u!114 &6619610385825782355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4063758318021268259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7f224583c8394e118d36021a34a8023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTag: Coin
+  itemFlash: {fileID: 2694942172259410981, guid: a45e4f857834748cd89e555bbf8b64ef, type: 3}
 --- !u!1 &4296776978504331384
 GameObject:
   m_ObjectHideFlags: 0
