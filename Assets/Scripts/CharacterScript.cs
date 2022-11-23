@@ -7,17 +7,21 @@ public class CharacterScript : MonoBehaviour
     [SerializeField]
     [Tooltip("Insert Character Controller")]
     private CharacterController controller;
+    
+    [SerializeField]
+    [Tooltip("Insert Animator Controller")]
+    private Animator playerAnimator;
 
     public static event Action onPlayerDeath;
     
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
-    private float gravity = -15f;
+    private float gravity = -17f;
     private float groundCastDist = 1.5f;
     public float forwardRunSpeed = 7f;
     public float sidestepSpeed = 50f;
-    public float jumpHeight = 70f;
+    public float jumpHeight = 100f;
     public float health = 100f;
 
     private Rigidbody rigidbody;
@@ -49,6 +53,7 @@ public class CharacterScript : MonoBehaviour
             //rigidbody.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
         }
         controller.Move(velocity * Time.deltaTime);
+        playerAnimator.SetBool("is_jumping", !grounded);
 
         
         // Crouching
