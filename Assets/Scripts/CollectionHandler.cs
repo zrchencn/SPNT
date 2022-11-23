@@ -6,15 +6,16 @@ using UnityEngine;
 public class CollectionHandler : MonoBehaviour
 {
     [SerializeField] private string itemTag;
-
     [SerializeField] private ParticleSystem itemFlash;
+    [SerializeField] [Tooltip("How many points is this item worth?")] private int points;
 
     private GameObject item;
+    private LevelManager levelManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class CollectionHandler : MonoBehaviour
         {
             Instantiate(itemFlash, item.transform.position, Quaternion.identity);
             Destroy(item);
+            levelManager.addToScore(points);
         }
     }
 

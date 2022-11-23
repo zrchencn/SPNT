@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,17 +9,21 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     public float currentTime;
     public float endTime;
-    public bool gameEnd; 
+    public bool gameEnd;
+
+    private float score;
     void Start()
     {
         currentTime = 0f;
         endTime = Single.PositiveInfinity;
+        score = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         currentTime += Time.deltaTime;
+        score += Time.deltaTime;
         Debug.Log("Level Manager" + currentTime);
         if (currentTime >= endTime && !gameEnd)
         {
@@ -35,6 +40,11 @@ public class LevelManager : MonoBehaviour
 
     public float getScore()
     {
-        return currentTime;
+        return score;
+    }
+
+    public void addToScore(float points)
+    {
+        score += points;
     }
 }

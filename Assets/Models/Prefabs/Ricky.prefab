@@ -534,6 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTag: Coin
   itemFlash: {fileID: 2694942172259410981, guid: a45e4f857834748cd89e555bbf8b64ef, type: 3}
+  points: 5
 --- !u!1 &4296776978504331384
 GameObject:
   m_ObjectHideFlags: 0
