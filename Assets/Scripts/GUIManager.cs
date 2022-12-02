@@ -54,6 +54,6 @@ public class GUIManager : MonoBehaviour
 
     private void RestartButtonPressed()
     {
-        SceneManager.LoadScene("Scenes/Start");
+        SceneManager.LoadScene("Scenes/StartMenu");
     }
 }

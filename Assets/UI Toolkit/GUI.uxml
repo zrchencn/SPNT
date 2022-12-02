@@ -1,9 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:GroupBox name="report" style="display: flex; flex-shrink: 1; flex-grow: 1; align-items: center; right: auto; font-size: 20px;">
         <ui:GroupBox name="TopGB" style="display: flex; height: 623px; width: 829px; align-items: center;">
-            <ui:Label text="YOU DIED" display-tooltip-when-elided="true" name="EndLabel" style="height: 120px; width: 567px; font-size: 60px; top: 20%; color: rgba(255, 100, 100, 255);" />
-            <ui:Label text="Score: " display-tooltip-when-elided="true" name="ScoreLabel" style="font-size: 60px; top: 30%; height: 105px; width: 534px;" />
-            <ui:Label text="HighestScore: " display-tooltip-when-elided="false" name="HighestScoreLabel" enable-rich-text="false" style="font-size: 60px; top: 30%; height: 121px; width: 538px;" />
+            <ui:Label text="YOU DIED" display-tooltip-when-elided="true" name="EndLabel" style="height: 120px; width: 567px; font-size: 60px; top: 20%; color: rgb(255, 100, 100);" />
+            <ui:Label text="Score: " display-tooltip-when-elided="true" name="ScoreLabel" style="font-size: 60px; top: 30%; height: 105px; width: 534px; color: rgb(255, 255, 255);" />
+            <ui:Label text="HighestScore: " display-tooltip-when-elided="false" name="HighestScoreLabel" enable-rich-text="false" style="font-size: 60px; top: 30%; height: 121px; width: 538px; -unity-font: url(&apos;project://database/Assets/Fonts/Retro%20Gaming.ttf?fileID=12800000&amp;guid=6e39771765c224968a72399aa75cd413&amp;type=3#Retro Gaming&apos;); color: rgb(255, 255, 255);" />
+            <ui:Label text="Points From Coin: " display-tooltip-when-elided="false" name="CoinScoreLabel" enable-rich-text="false" style="font-size: 60px; top: 30%; height: 121px; width: 546px; -unity-font: url(&apos;project://database/Assets/Fonts/Retro%20Gaming.ttf?fileID=12800000&amp;guid=6e39771765c224968a72399aa75cd413&amp;type=3#Retro Gaming&apos;); color: rgb(255, 255, 255); display: flex;" />
         </ui:GroupBox>
         <ui:GroupBox name="BottomGB" style="justify-content: space-around; top: 0; left: auto; height: 495px; width: 587px; align-items: center; position: relative; font-size: 60px;">
             <ui:Button text="RESTART" display-tooltip-when-elided="true" name="Restart" style="top: auto; font-size: 60px;" />
