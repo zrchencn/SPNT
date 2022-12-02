@@ -19,11 +19,11 @@ public class CharacterScript : MonoBehaviour
     private bool hit;
     private float gravity = -17f;
     private float groundCastDist = 1.5f;
-    public float forwardRunSpeed = 7f;
+    public float forwardRunSpeed = 8f;
     public float sidestepSpeed = 50f;
-    public float jumpHeight = 100f;
-    public float health = 100f;
-
+    public float jumpHeight = 90f;
+    
+    private float health = 100f;
     private Rigidbody rigidbody;
     
     
@@ -50,7 +50,6 @@ public class CharacterScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
-            //rigidbody.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
         }
         controller.Move(velocity * Time.deltaTime);
         playerAnimator.SetBool("is_jumping", !grounded);
@@ -79,6 +78,14 @@ public class CharacterScript : MonoBehaviour
         if (health <= 0 || playerTransform.position.y <= -20)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Fatal"))
+        {
+            health = 0;
         }
     }
 }

@@ -516,10 +516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3793217779284013607}
   playerAnimator: {fileID: 3793217779284013606}
-  forwardRunSpeed: 7
+  forwardRunSpeed: 8
   sidestepSpeed: 50
-  jumpHeight: 50
-  health: 100
+  jumpHeight: 90
 --- !u!114 &6619610385825782355
 MonoBehaviour:
   m_ObjectHideFlags: 0
