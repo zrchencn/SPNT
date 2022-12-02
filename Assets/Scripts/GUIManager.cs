@@ -12,6 +12,7 @@ public class GUIManager : MonoBehaviour
     private Label scoreLabel;
     private Label highestScoreLabel;
     private Label endLabel;
+    private Label coinScoreLabel;
     
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,8 @@ public class GUIManager : MonoBehaviour
         scoreLabel = root.Q<Label>("ScoreLabel");
         highestScoreLabel = root.Q<Label>("HighestScoreLabel");
         endLabel = root.Q<Label>("EndLabel");
+        coinScoreLabel = root.Q<Label>("CoinScoreLabel");
+        
         
 
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
@@ -34,21 +37,17 @@ public class GUIManager : MonoBehaviour
     void Update()
     {
         float currentScore = levelManager.getScore();
-        // Debug.Log("GUI TIME: " + currentScore);
         scoreLabel.text = "SCORE: " + currentScore.ToString("0");
         highestScoreLabel.text = "HIGHEST SCORE: " + MainManager.Instance.HighScore.ToString("0");
+        coinScoreLabel.text = "POINTS FROM COINS: " + levelManager.getPointsFromCoins().ToString("0");
         
-        if (levelManager.gameEnd)
+        if (levelManager.isGameOver())
         {
             reportGB.visible = true;
-            // restartButton.visible = true;
-            // endLabel.visible = true;
         }
         else
         {
             reportGB.visible = false;
-            // restartButton.visible = false;
-            // endLabel.visible = false;
         }
     }
 

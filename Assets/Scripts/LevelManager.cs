@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     private bool gameEnd;
     private float score;
     private float highScore;
+    private float pointsFromCoins;
     void Start()
     {
         currentTime = 0f;
@@ -53,11 +54,17 @@ public class LevelManager : MonoBehaviour
 
     public void addToScore(float points)
     {
+        pointsFromCoins += points;
         score += points;
     }
 
     public bool isGameOver()
     {
         return gameEnd;
+    }
+
+    public float getPointsFromCoins()
+    {
+        return pointsFromCoins;
     }
 }

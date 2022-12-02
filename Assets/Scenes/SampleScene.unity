@@ -133,8 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 135344778}
   - component: {fileID: 135344781}
-  - component: {fileID: 135344780}
   - component: {fileID: 135344782}
+  - component: {fileID: 135344780}
   m_Layer: 5
   m_Name: Score Drop Shadow
   m_TagString: Untagged
@@ -268,10 +268,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 135344777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c41e4c90eae7b9143aa67a0cb9fc2023, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ded81b283b704c3cbcc3938c0d1e81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 135344780}
 --- !u!1 &217002849
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,8 +713,8 @@ GameObject:
   m_Component:
   - component: {fileID: 805662069}
   - component: {fileID: 805662071}
-  - component: {fileID: 805662070}
   - component: {fileID: 805662072}
+  - component: {fileID: 805662070}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -848,10 +848,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 805662068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c41e4c90eae7b9143aa67a0cb9fc2023, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ded81b283b704c3cbcc3938c0d1e81a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
+  scoreText: {fileID: 805662070}
 --- !u!1 &812467292
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +963,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:

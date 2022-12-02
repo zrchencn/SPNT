@@ -79,7 +79,7 @@ public class CharacterScript : MonoBehaviour
         // Health and Death
         if (health <= 0 || playerTransform.position.y <= -20)
         {
-            if (!levelManager.gameEnd)
+            if (!levelManager.isGameOver())
             {
                levelManager.endGame();
             }
