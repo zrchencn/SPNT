@@ -25,12 +25,14 @@ public class CharacterScript : MonoBehaviour
     public float health = 100f;
 
     private Rigidbody rigidbody;
+    private LevelManager levelManager;
     
     
     // Start is called before the first frame update
     void Start()
     {
         health = 100f;
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -78,7 +80,11 @@ public class CharacterScript : MonoBehaviour
         // Health and Death
         if (health <= 0 || playerTransform.position.y <= -20)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if (!levelManager.gameEnd)
+            {
+               levelManager.endGame();
+            }
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
