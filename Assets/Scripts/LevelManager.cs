@@ -12,11 +12,16 @@ public class LevelManager : MonoBehaviour
     public bool gameEnd;
 
     private float score;
+    private float highScore;
     void Start()
     {
         currentTime = 0f;
         endTime = Single.PositiveInfinity;
         score = 0f;
+        if (MainManager.Instance != null)
+        {
+            highScore = MainManager.Instance.HighScore;
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +29,7 @@ public class LevelManager : MonoBehaviour
     {
         currentTime += Time.deltaTime;
         score += Time.deltaTime;
-        Debug.Log("Level Manager" + currentTime);
+        // Debug.Log("Level Manager" + currentTime);
         if (currentTime >= endTime && !gameEnd)
         {
             endGame();
@@ -34,8 +39,11 @@ public class LevelManager : MonoBehaviour
     public void endGame()
     {
         gameEnd = true;
+        highScore = Math.Max(highScore, score);
         Time.timeScale = 0;
         Debug.Log("GAME ENDED");
+        Debug.Log(highScore);
+        MainManager.Instance.updateHighestScore(highScore);
     }
 
     public float getScore()
