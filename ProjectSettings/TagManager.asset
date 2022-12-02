@@ -6,6 +6,7 @@ TagManager:
   tags:
   - harmful
   - Coin
+  - Fatal
   layers:
   - Default
   - TransparentFX

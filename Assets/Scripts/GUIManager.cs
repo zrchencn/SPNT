@@ -34,7 +34,7 @@ public class GUIManager : MonoBehaviour
         float currentScore = levelManager.getScore();
         // Debug.Log("GUI TIME: " + currentScore);
         //scoreLabel.text = "SCORE: " + currentScore.ToString("0");
-        if (levelManager.gameEnd)
+        if (levelManager.isGameOver())
         {
             restartButton.visible = true;
             endLabel.visible = true;

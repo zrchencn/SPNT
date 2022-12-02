@@ -9,8 +9,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     public float currentTime;
     public float endTime;
-    public bool gameEnd;
-
+    
+    private bool gameEnd;
     private float score;
     void Start()
     {
@@ -46,5 +46,10 @@ public class LevelManager : MonoBehaviour
     public void addToScore(float points)
     {
         score += points;
+    }
+
+    public bool isGameOver()
+    {
+        return gameEnd;
     }
 }
