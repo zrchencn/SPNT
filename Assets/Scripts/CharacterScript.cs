@@ -1,7 +1,5 @@
-using System;
-using UnityEditor;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CharacterScript : MonoBehaviour
 {
@@ -16,8 +14,6 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] [Tooltip("Insert Death Particle Explosion")]
     private ParticleSystem deathExplosion;
 
-    public static event Action onPlayerDeath;
-    
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
@@ -26,6 +22,7 @@ public class CharacterScript : MonoBehaviour
     public float forwardRunSpeed = 8f;
     public float sidestepSpeed = 50f;
     public float jumpHeight = 90f;
+    private float collisionTime = 2f;
     
     private float health = 100f;
     private Rigidbody rigidbody;
@@ -36,8 +33,8 @@ public class CharacterScript : MonoBehaviour
     void Start()
     {
         gameObject.SetActive(true);
-        health = 100f;
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
+        touchedElectricity = false;
     }
 
     // Update is called once per frame
@@ -73,22 +70,27 @@ public class CharacterScript : MonoBehaviour
         }
         
         // Object Collision
-        hit = Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f);
-        
-        // Grounded is true if you are standing on top of an object
-        if (Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f))
+        // Starting position is lower to detect low obstacles
+        Vector3 lowCharacter = new Vector3(playerTransform.position.x, playerTransform.position.y - 1f,
+            playerTransform.position.z);
+        hit = Physics.Raycast(lowCharacter, Vector3.forward, 1.5f);
+
+        if (hit)
         {
-            grounded = true;
+            collisionTime -= Time.deltaTime;
+        }
+        else
+        {
+            collisionTime = 2.0f;
         }
 
         // Health and Death
-        // if (health <= 0 && touchedElectricity)
-        // {
-        //     Instantiate(deathExplosion, transform.position, Quaternion.identity);
-        //     gameObject.SetActive(false);
-        //     touchedElectricity = false;
-        // }
-        if (health <= 0 || playerTransform.position.y <= -20)
+        if (touchedElectricity || collisionTime <= 0)
+        {
+            StartCoroutine(DeathByElectric());
+            touchedElectricity = false;
+        }
+        else if (health <= 0 || playerTransform.position.y <= -20)
         {
             if (!levelManager.isGameOver())
             {
@@ -98,11 +100,27 @@ public class CharacterScript : MonoBehaviour
         }
     }
 
+    private IEnumerator DeathByElectric()
+    {
+        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        //gameObject.SetActive(false);
+        //GetComponent<MeshRenderer>().enabled = false;
+        transform.localScale = new Vector3(0, 0, 0);
+        forwardRunSpeed = 0;
+        levelManager.kill();
+        
+        yield return new WaitForSeconds(1.0f);
+
+        if (!levelManager.isGameOver())
+        {
+            levelManager.endGame();
+        }
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Fatal"))
         {
-            health = 0;
             touchedElectricity = true;
         }
     }
