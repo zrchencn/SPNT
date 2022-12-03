@@ -1,7 +1,5 @@
-using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class CharacterScript : MonoBehaviour
 {
@@ -9,8 +7,6 @@ public class CharacterScript : MonoBehaviour
     [Tooltip("Insert Character Controller")]
     private CharacterController controller;
 
-    public static event Action onPlayerDeath;
-    
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
@@ -19,7 +15,13 @@ public class CharacterScript : MonoBehaviour
     private float collisionTime = 2f;
     public float forwardRunSpeed = 7f;
     public float sidestepSpeed = 50f;
-    public float jumpHeight = 70f;
+    public float jumpHeight = 90f;
+    private float collisionTime = 2f;
+    
+    private float health = 100f;
+    private Rigidbody rigidbody;
+    private LevelManager levelManager;
+    private bool touchedElectricity;
     public float health = 100f;
 
     private Rigidbody rigidbody;
@@ -28,6 +30,9 @@ public class CharacterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.SetActive(true);
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
+        touchedElectricity = false;
         health = 100f;
     }
 
@@ -75,13 +80,42 @@ public class CharacterScript : MonoBehaviour
         }
         else
         {
-            collisionTime = 2f;
+            collisionTime = 2.0f;
         }
 
         // Health and Death
-        if (health <= 0 || playerTransform.position.y <= -20 || collisionTime <= 0)
+        if (touchedElectricity || collisionTime <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(DeathByElectric());
+            touchedElectricity = false;
+        }
+        else if (health <= 0 || playerTransform.position.y <= -20)
+        {
+            collisionTime -= Time.deltaTime;
+        }
+
+    private IEnumerator DeathByElectric()
+    {
+        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        //gameObject.SetActive(false);
+        //GetComponent<MeshRenderer>().enabled = false;
+        transform.localScale = new Vector3(0, 0, 0);
+        forwardRunSpeed = 0;
+        levelManager.kill();
+        
+        yield return new WaitForSeconds(1.0f);
+
+        if (!levelManager.isGameOver())
+        {
+            levelManager.endGame();
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Fatal"))
+        {
+            touchedElectricity = true;
         }
     }
 }

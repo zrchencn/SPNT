@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     private float score;
     private float highScore;
     private float pointsFromCoins;
+    private bool dead;
 
     private GameOverScreen gameOver;
 
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
         // {
         //     highScore = MainManager.Instance.HighScore;
         // }
+        dead = false;
         gameOver = GameObject.Find("Game Over").GetComponent<GameOverScreen>();
         gameOver.Disable();
     }
@@ -36,8 +38,11 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
-        score += Time.deltaTime;
+        if (!dead)
+        {
+            currentTime += Time.deltaTime;
+            score += Time.deltaTime;
+        }
         // Debug.Log("Level Manager" + currentTime);
         if (currentTime >= endTime && !gameEnd)
         {
@@ -78,5 +83,10 @@ public class LevelManager : MonoBehaviour
     public float getPointsFromCoins()
     {
         return pointsFromCoins;
+    }
+
+    public void kill()
+    {
+        dead = true;
     }
 }
