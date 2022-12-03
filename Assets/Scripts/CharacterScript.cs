@@ -1,34 +1,40 @@
-using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class CharacterScript : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Insert Character Controller")]
     private CharacterController controller;
-
-    public static event Action onPlayerDeath;
     
+    [SerializeField]
+    [Tooltip("Insert Animator Controller")]
+    private Animator playerAnimator;
+
+    [SerializeField] [Tooltip("Insert Death Particle Explosion")]
+    private ParticleSystem deathExplosion;
+
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
-    private float gravity = -15f;
+    private float gravity = -17f;
     private float groundCastDist = 1.5f;
-    private float collisionTime = 2f;
-    public float forwardRunSpeed = 7f;
+    public float forwardRunSpeed = 8f;
     public float sidestepSpeed = 50f;
-    public float jumpHeight = 70f;
-    public float health = 100f;
-
+    public float jumpHeight = 90f;
+    private float collisionTime = 2f;
+    
+    private float health = 100f;
     private Rigidbody rigidbody;
-    
-    
+    private LevelManager levelManager;
+    private bool touchedElectricity;
+
     // Start is called before the first frame update
     void Start()
     {
-        health = 100f;
+        gameObject.SetActive(true);
+        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
+        touchedElectricity = false;
     }
 
     // Update is called once per frame
@@ -48,9 +54,9 @@ public class CharacterScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
-            //rigidbody.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
         }
         controller.Move(velocity * Time.deltaTime);
+        playerAnimator.SetBool("is_jumping", !grounded);
 
         
         // Crouching
@@ -79,9 +85,38 @@ public class CharacterScript : MonoBehaviour
         }
 
         // Health and Death
-        if (health <= 0 || playerTransform.position.y <= -20 || collisionTime <= 0)
+        if (touchedElectricity)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            StartCoroutine(DeathByElectric());
+        }
+        else if (health <= 0 || playerTransform.position.y <= -20 || collisionTime <= 0)
+        {
+            if (!levelManager.isGameOver())
+            {
+                levelManager.endGame();
+            }
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
+    private IEnumerator DeathByElectric()
+    {
+        Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        gameObject.SetActive(false);
+        
+        yield return new WaitForSeconds(2f);
+
+        if (!levelManager.isGameOver())
+        {
+            levelManager.endGame();
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Fatal"))
+        {
+            touchedElectricity = true;
         }
     }
 }
