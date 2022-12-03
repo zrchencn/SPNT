@@ -7,6 +7,9 @@ public class CharacterScript : MonoBehaviour
     [Tooltip("Insert Character Controller")]
     private CharacterController controller;
 
+    [SerializeField] [Tooltip("Insert Character Flash")]
+    private ParticleSystem deathExplosion;
+
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
@@ -16,15 +19,11 @@ public class CharacterScript : MonoBehaviour
     public float forwardRunSpeed = 7f;
     public float sidestepSpeed = 50f;
     public float jumpHeight = 90f;
-    private float collisionTime = 2f;
     
     private float health = 100f;
     private Rigidbody rigidbody;
     private LevelManager levelManager;
     private bool touchedElectricity;
-    public float health = 100f;
-
-    private Rigidbody rigidbody;
     
     
     // Start is called before the first frame update
@@ -42,7 +41,7 @@ public class CharacterScript : MonoBehaviour
         // Grounded
         Transform playerTransform = transform;
         grounded = Physics.Raycast(playerTransform.position, Vector3.down, groundCastDist);
-        
+
         // Ground Movement
         float x = Input.GetAxis("Horizontal");
         Vector3 movement = (playerTransform.right * x) + (playerTransform.forward * 1);
@@ -55,9 +54,10 @@ public class CharacterScript : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight);
             //rigidbody.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
         }
+
         controller.Move(velocity * Time.deltaTime);
 
-        
+
         // Crouching
         if (Input.GetKey(KeyCode.LeftShift) && grounded)
         {
@@ -67,7 +67,7 @@ public class CharacterScript : MonoBehaviour
         {
             controller.height = 3.41f;
         }
-        
+
         // Object Collision
         // Starting position is lower to detect low obstacles
         Vector3 lowCharacter = new Vector3(playerTransform.position.x, playerTransform.position.y - 1f,
@@ -93,6 +93,7 @@ public class CharacterScript : MonoBehaviour
         {
             collisionTime -= Time.deltaTime;
         }
+    }
 
     private IEnumerator DeathByElectric()
     {
