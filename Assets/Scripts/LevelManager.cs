@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,15 +16,21 @@ public class LevelManager : MonoBehaviour
     private float score;
     private float highScore;
     private float pointsFromCoins;
+
+    private GameOverScreen gameOver;
+
+
     void Start()
     {
         currentTime = 0f;
         endTime = Single.PositiveInfinity;
         score = 0f;
-        if (MainManager.Instance != null)
-        {
-            highScore = MainManager.Instance.HighScore;
-        }
+        // if (MainManager.Instance != null)
+        // {
+        //     highScore = MainManager.Instance.HighScore;
+        // }
+        gameOver = GameObject.Find("Game Over").GetComponent<GameOverScreen>();
+        gameOver.Disable();
     }
 
     // Update is called once per frame
@@ -44,7 +52,11 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
         Debug.Log("GAME ENDED");
         Debug.Log(highScore);
-        MainManager.Instance.updateHighestScore(highScore);
+        //MainManager.Instance.updateHighestScore(highScore);
+        //SceneManager.LoadScene("GameOver");
+        gameOver.Enable();
+        gameOver.setScores((int)Math.Floor(pointsFromCoins/5), (int)score, (int)currentTime);
+
     }
 
     public float getScore()

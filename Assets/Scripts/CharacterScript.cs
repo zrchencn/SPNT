@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,9 @@ public class CharacterScript : MonoBehaviour
     [SerializeField]
     [Tooltip("Insert Animator Controller")]
     private Animator playerAnimator;
+
+    [SerializeField] [Tooltip("Insert Death Particle Explosion")]
+    private ParticleSystem deathExplosion;
 
     public static event Action onPlayerDeath;
     
@@ -26,11 +30,12 @@ public class CharacterScript : MonoBehaviour
     private float health = 100f;
     private Rigidbody rigidbody;
     private LevelManager levelManager;
-    
-    
+    private bool touchedElectricity;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.SetActive(true);
         health = 100f;
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
     }
@@ -77,13 +82,19 @@ public class CharacterScript : MonoBehaviour
         }
 
         // Health and Death
+        // if (health <= 0 && touchedElectricity)
+        // {
+        //     Instantiate(deathExplosion, transform.position, Quaternion.identity);
+        //     gameObject.SetActive(false);
+        //     touchedElectricity = false;
+        // }
         if (health <= 0 || playerTransform.position.y <= -20)
         {
             if (!levelManager.isGameOver())
             {
-               levelManager.endGame();
+                levelManager.endGame();
             }
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -92,6 +103,7 @@ public class CharacterScript : MonoBehaviour
         if (col.gameObject.CompareTag("Fatal"))
         {
             health = 0;
+            touchedElectricity = true;
         }
     }
 }

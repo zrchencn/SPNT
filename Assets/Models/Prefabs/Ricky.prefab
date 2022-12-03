@@ -516,6 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3793217779284013607}
   playerAnimator: {fileID: 3793217779284013606}
+  deathExplosion: {fileID: 8618714577845487467, guid: d60a05e126a344c07ad9e27f19e72355, type: 3}
   forwardRunSpeed: 8
   sidestepSpeed: 50
   jumpHeight: 90
