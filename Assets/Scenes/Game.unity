@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44558752, g: 0.71895045, b: 0.7304649, a: 1}
+  m_IndirectSpecularColor: {r: 0.4455881, g: 0.7189515, b: 0.730466, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1042,7 +1042,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1080,8 +1080,8 @@ Camera:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.31764707, g: 0.31764707, b: 0.31764707, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.10588236, g: 0.1774461, b: 0.24705882, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1201,7 +1201,7 @@ PrefabInstance:
     - target: {fileID: 2907685378453496730, guid: 697e0af8fce134243a4ad89661d22cde, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b8f45801929c94881b450a29c1efd174, type: 2}
+      objectReference: {fileID: 2100000, guid: 43c84a51d0cab4f2a856804a2c32543a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 697e0af8fce134243a4ad89661d22cde, type: 3}
 --- !u!1 &1530195563
@@ -1238,6 +1238,7 @@ MonoBehaviour:
   - {fileID: 2907685378453496728, guid: 52573f016a512ed4fa9ac7c1b6a25762, type: 3}
   - {fileID: 2907685378453496728, guid: bec6ea1bd2acf1543b4f74940cda545e, type: 3}
   - {fileID: 2907685378453496728, guid: 971a04e0670959d41bf69eb05d175eaa, type: 3}
+  - {fileID: 2245119363182796475, guid: 31f775cdcecb4472d8edcc9410947618, type: 3}
   player_transform: {fileID: 543450652945604049}
 --- !u!4 &1530195565
 Transform:
