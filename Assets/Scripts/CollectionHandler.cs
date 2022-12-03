@@ -8,6 +8,8 @@ public class CollectionHandler : MonoBehaviour
     [SerializeField] private string itemTag;
     [SerializeField] private ParticleSystem itemFlash;
     [SerializeField] [Tooltip("How many points is this item worth?")] private int points;
+    [SerializeField] private AudioClip clip_collect;
+    private AudioSource source;
 
     private GameObject item;
     private LevelManager levelManager;
@@ -16,6 +18,7 @@ public class CollectionHandler : MonoBehaviour
     void Start()
     {
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,6 +26,9 @@ public class CollectionHandler : MonoBehaviour
     {
         if (item != null)
         {
+            source.clip = clip_collect;
+            source.volume = 0.5f;
+            source.Play();
             Instantiate(itemFlash, item.transform.position, Quaternion.identity);
             Destroy(item);
             levelManager.addToScore(points);

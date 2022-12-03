@@ -13,7 +13,15 @@ public class CharacterScript : MonoBehaviour
 
     [SerializeField] [Tooltip("Insert Death Particle Explosion")]
     private ParticleSystem deathExplosion;
-
+    
+    [SerializeField] private AudioClip music_danger;
+    [SerializeField] private AudioClip music_background;
+    [SerializeField] private AudioClip clip_jump;
+    [SerializeField] private AudioClip clip_hurt;
+    [SerializeField] private AudioClip clip_die;
+    private AudioSource source;
+    private AudioSource music;
+    
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
@@ -35,6 +43,9 @@ public class CharacterScript : MonoBehaviour
         gameObject.SetActive(true);
         levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
         touchedElectricity = false;
+        source = GetComponent<AudioSource>();
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
+        music.clip = music_background;
     }
 
     // Update is called once per frame
@@ -54,6 +65,9 @@ public class CharacterScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
+            source.clip = clip_jump;
+            source.volume = 0.9f;
+            source.Play();
         }
         controller.Move(velocity * Time.deltaTime);
         playerAnimator.SetBool("is_jumping", !grounded);
@@ -94,6 +108,10 @@ public class CharacterScript : MonoBehaviour
         {
             if (!levelManager.isGameOver())
             {
+                source.clip = clip_die;
+                source.volume = 0.5f;
+                source.Play();
+                music.volume = 0.0f;
                 levelManager.endGame();
             }
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -108,6 +126,10 @@ public class CharacterScript : MonoBehaviour
         transform.localScale = new Vector3(0, 0, 0);
         forwardRunSpeed = 0;
         levelManager.kill();
+        music.volume = 0.0f;
+        source.clip = clip_die;
+        source.volume = 0.5f;
+        source.Play();
         
         yield return new WaitForSeconds(1.0f);
 

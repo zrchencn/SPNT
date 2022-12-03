@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     private bool dead;
 
     private GameOverScreen gameOver;
+    private AudioSource music;
+    [SerializeField] private AudioClip music_menu;
 
 
     void Start()
@@ -33,6 +35,7 @@ public class LevelManager : MonoBehaviour
         dead = false;
         gameOver = GameObject.Find("Game Over").GetComponent<GameOverScreen>();
         gameOver.Disable();
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -61,7 +64,9 @@ public class LevelManager : MonoBehaviour
         //SceneManager.LoadScene("GameOver");
         gameOver.Enable();
         gameOver.setScores((int)Math.Floor(pointsFromCoins/5), (int)score, (int)currentTime);
-
+        music.clip = music_menu;
+        music.volume = 0.7f;
+        music.Play();
     }
 
     public float getScore()

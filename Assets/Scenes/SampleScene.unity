@@ -301,7 +301,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 459035b37d153459fbef043c741ad39d, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.73
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -939,6 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTime: 0
   endTime: 10
+  music_menu: {fileID: 8300000, guid: 4e724f638daa842b79420d9bd18ea6ca, type: 3}
 --- !u!4 &415086424
 Transform:
   m_ObjectHideFlags: 0
@@ -2903,6 +2904,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ricky
       objectReference: {fileID: 0}
+    - target: {fileID: 4063758318021268260, guid: 57abd55d4e9304f52893d98ca994e025, type: 3}
+      propertyPath: clip_die
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e9e63e0742276445b97a87cff60ce48, type: 3}
+    - target: {fileID: 4063758318021268260, guid: 57abd55d4e9304f52893d98ca994e025, type: 3}
+      propertyPath: clip_hurt
+      value: 
+      objectReference: {fileID: 8300000, guid: e57ad5911ec199f43ba58075ef2ff179, type: 3}
+    - target: {fileID: 4063758318021268260, guid: 57abd55d4e9304f52893d98ca994e025, type: 3}
+      propertyPath: clip_jump
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a0b2aae1b9bcf04ca989d188f1cff62, type: 3}
     - target: {fileID: 4063758318021268260, guid: 57abd55d4e9304f52893d98ca994e025, type: 3}
       propertyPath: jumpHeight
       value: 70
