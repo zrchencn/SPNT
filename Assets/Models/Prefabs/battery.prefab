@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8020830186858224728}
   m_Layer: 0
   m_Name: battery
-  m_TagString: Untagged
+  m_TagString: harmful
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,5 +95,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.010000003, y: 0.028000006, z: 0.01}
+  m_Size: {x: 0.01, y: 0.028, z: 0.01}
   m_Center: {x: 4.656613e-10, y: 0.013999998, z: 0.000000014901161}

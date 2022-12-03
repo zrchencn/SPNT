@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 373752972485762102}
   m_Layer: 0
   m_Name: dice
-  m_TagString: Untagged
+  m_TagString: harmful
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,5 +95,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.015999999, y: 0.015999999, z: 0.015999999}
+  m_Size: {x: 0.016, y: 0.015999999, z: 0.015999999}
   m_Center: {x: -0.000100000296, y: -0.00009999843, z: -0.00009999983}

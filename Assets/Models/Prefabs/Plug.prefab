@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 233113562766444833}
   m_Layer: 0
   m_Name: Plug
-  m_TagString: Untagged
+  m_TagString: harmful
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 3799296016883321204}
   m_Layer: 0
   m_Name: default
-  m_TagString: Untagged
+  m_TagString: harmful
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
