@@ -1,43 +1,34 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class CharacterScript : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Insert Character Controller")]
     private CharacterController controller;
-    
-    [SerializeField]
-    [Tooltip("Insert Animator Controller")]
-    private Animator playerAnimator;
-
-    [SerializeField] [Tooltip("Insert Death Particle Explosion")]
-    private ParticleSystem deathExplosion;
 
     public static event Action onPlayerDeath;
     
     private Vector3 velocity;
     private bool grounded;
     private bool hit;
-    private float gravity = -17f;
+    private float gravity = -15f;
     private float groundCastDist = 1.5f;
-    public float forwardRunSpeed = 8f;
+    private float collisionTime = 2f;
+    public float forwardRunSpeed = 7f;
     public float sidestepSpeed = 50f;
-    public float jumpHeight = 90f;
-    
-    private float health = 100f;
-    private Rigidbody rigidbody;
-    private LevelManager levelManager;
-    private bool touchedElectricity;
+    public float jumpHeight = 70f;
+    public float health = 100f;
 
+    private Rigidbody rigidbody;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(true);
         health = 100f;
-        levelManager = GameObject.Find("Level Manager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -57,9 +48,9 @@ public class CharacterScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight);
+            //rigidbody.AddForce(playerTransform.up * jumpHeight, ForceMode.Impulse);
         }
         controller.Move(velocity * Time.deltaTime);
-        playerAnimator.SetBool("is_jumping", !grounded);
 
         
         // Crouching
@@ -73,37 +64,24 @@ public class CharacterScript : MonoBehaviour
         }
         
         // Object Collision
-        hit = Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f);
-        
-        // Grounded is true if you are standing on top of an object
-        if (Physics.Raycast(playerTransform.position, Vector3.forward, 0.1f))
+        // Starting position is lower to detect low obstacles
+        Vector3 lowCharacter = new Vector3(playerTransform.position.x, playerTransform.position.y - 1f,
+            playerTransform.position.z);
+        hit = Physics.Raycast(lowCharacter, Vector3.forward, 1.5f);
+
+        if (hit)
         {
-            grounded = true;
+            collisionTime -= Time.deltaTime;
+        }
+        else
+        {
+            collisionTime = 2f;
         }
 
         // Health and Death
-        // if (health <= 0 && touchedElectricity)
-        // {
-        //     Instantiate(deathExplosion, transform.position, Quaternion.identity);
-        //     gameObject.SetActive(false);
-        //     touchedElectricity = false;
-        // }
-        if (health <= 0 || playerTransform.position.y <= -20)
+        if (health <= 0 || playerTransform.position.y <= -20 || collisionTime <= 0)
         {
-            if (!levelManager.isGameOver())
-            {
-                levelManager.endGame();
-            }
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.CompareTag("Fatal"))
-        {
-            health = 0;
-            touchedElectricity = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
